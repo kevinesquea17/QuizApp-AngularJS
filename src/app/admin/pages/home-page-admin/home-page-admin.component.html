@@ -1,0 +1,30 @@
+<div class="min-h-screen w-full bg-gray-100 relative font-Unbounded">
+    <app-header></app-header>
+    <p *ngIf="listQuizes.length == 0" class="font-normal relative top-[140px] w-full text-center text-xl text-gray-800">Aún no hay quizes en tu lista, comienza agregando uno.</p>
+    <div class="w-[90%] sm:w-[80%] mx-auto relative top-[90px] grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-white h-40 rounded shadow-sm p-4 relative" *ngFor="let quiz of listQuizes; let i = index">
+            <h2 class="font-bold text-gray-800 text-lg mb-3">{{quiz.name}}</h2>
+            <h4 class="text-sm font-semibold text-green-500 mb-6">Quiz #{{i+1}}</h4>
+            <div class="flex items-center space-x-12">
+                <p class="text-gray-800 font-bold">Questions: </p>
+                <div class="h-10 w-10 rounded-full bg-green-500 text-white shadow-sm flex items-center justify-center text-sm">
+                    {{quiz.questions.length}}
+                </div>
+            </div>
+            <div class="absolute top-5  right-3 w-6 h-6 rounded-full text-xs font-bold bg-gray-800 text-white flex justify-center items-center cursor-pointer" (click)="showModal(quiz._id)">
+                x
+            </div>
+        </div>
+    </div>
+    <button class="fixed bottom-10 right-10 bg-green-500 shadow-lg shadow-green-500 text-white px-4 py-2 rounded-full" routerLink="/admin/create-quiz">Create Quiz</button>
+</div>
+
+<div *ngIf="modal" class="fixed top-0 left-0 w-full h-screen z-10 bg-black bg-opacity-90 flex justify-center items-center font-Unbounded">
+    <div class="bg-white w-[80%] sm:w-[40%] rounded shadow-sm p-4 py-8">
+        <p class="font-semibold text-gray-800 text-lg mb-6">¿Estás seguro que deseas eliminar el Quiz?</p>
+        <div class="flex space-x-6 items-center justify-end">
+            <button class="bg-green-500 px-6 py-2 rounded text-white font-semibold hover:bg-gray-800 transition duration-300 ease-out" (click)="deleteQuiz()">Si</button>
+            <button class="bg-transparent border border-gray-800 px-2 py-2 rounded text-gray-800 font-semibold hover:bg-gray-800 hover:text-white transition duration-300 ease-out" (click)="cancelar()">Cancelar</button>
+        </div>
+    </div>
+</div>

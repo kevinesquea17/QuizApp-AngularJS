@@ -1,0 +1,11 @@
+<header class="bg-white w-full h-[80px] shadow-sm fixed top-0 left-0 flex items-center">
+    <div class="flex justify-between items-center w-[90%] sm:w-[80%] mx-auto">
+        <h2 class="text-gray-800 font-bold text-lg sm:text-2xl cursor-pointer" routerLink="/admin" >Quiz App</h2>
+        <div class="flex space-x-4 sm:space-x-6 items-center">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 uppercase text-white flex justify-center items-center bg-gray-800 text-xs sm:text-base rounded-full">
+                {{admin.name.charAt(0)}}
+            </div>
+            <button class="px-2 py-2 sm:px-4 sm:py-2 rounded bg-green-500 text-white text-sm sm:text-base" (click)="logout()">Log Out</button>
+        </div>
+    </div>
+</header>

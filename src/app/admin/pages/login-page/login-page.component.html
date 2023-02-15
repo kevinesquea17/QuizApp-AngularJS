@@ -1,0 +1,17 @@
+<div class="bg-gray-100 w-full h-screen flex justify-center items-center font-Unbounded">
+    <app-card class="w-[90%] sm:w-[40%]">
+        <h2 class="text-gray-800 text-3xl font-bold text-center mb-2">Log in</h2>
+        <p class="text-green-500 text-sm font-semibold text-center mb-10">Quiz App</p>
+        <form class="w-[80%] mx-auto" (ngSubmit)="login()">
+            <div class="flex flex-col mb-6">
+                <label class="text-xs font-semibold text-green-500 mb-2">Email*</label>
+                <input [(ngModel)]="email" [ngModelOptions]="{standalone: true}" type="text" placeholder="Your email." class="py-3 px-2 w-full rounded bg-gray-200 text-gray-400 outline-none text-sm">
+            </div>
+            <div class="flex flex-col mb-6">
+                <label class="text-xs font-semibold text-green-500 mb-2">Password*</label>
+                <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" type="password" placeholder="Your password." class="py-3 px-2 w-full rounded bg-gray-200 text-gray-400 outline-none text-sm">
+            </div>
+            <input type="submit" value="Log in" class="w-full py-3 bg-gray-800 text-white font-semibold rounded hover:bg-green-500 transition duration-300 ease-out">
+        </form>
+    </app-card>
+</div>

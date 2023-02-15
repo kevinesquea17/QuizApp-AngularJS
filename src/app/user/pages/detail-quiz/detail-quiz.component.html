@@ -1,0 +1,48 @@
+<div class="bg-gray-100 w-full relative h-screen flex justify-center items-center font-Unbounded">
+    <app-card *ngIf="startQuiz" class="w-[90%] sm:w-[40%]">
+        <h2 class="text-xl text-center text-gray-800 mb-2">Welcome to Quiz App</h2>
+        <p class="text-sm font-semibold text-gray-800 text-center mb-20">Has elegido: <span class="text-green-500">{{quiz.name}}</span></p>
+        <form class="w-[80%] mx-auto" (ngSubmit)="showQuestions()">
+            <div class="flex flex-col mb-10">
+                <label class="text-gray-800 font-semibold text-sm text-center mb-3">Please enter your username.</label>
+                <input [(ngModel)]="username" [ngModelOptions]="{standalone: true}" type="text" placeholder="Your username." class="px-2 py-3 w-full rounded bg-gray-200 text-gray-400 outline-none text-center">
+                <p *ngIf="alert != ''" class="font-semibold text-sm text-red-500 text-center mt-2">{{alert}}</p>
+            </div>
+           
+            <input type="submit" value="Let's to Play" class="rounded py-3 w-full bg-gray-800 text-white hover:bg-green-500 transition duration-300 ease-out">
+        </form>
+    </app-card>
+
+    <app-card *ngIf="questions" class="w-[90%] sm:w-[40%]">
+        <div class="flex flex-col text-center mb-6 sm:mb-4">
+            <p class="text-xs text-green-500 font-semibold mb-2">Question {{currentQuestion + 1}}/{{quiz.questions.length}}</p>
+            <p class="font-bold text-gray-800 text-base sm:text-lg min-h-[50px]">{{quiz.questions[currentQuestion].question}}</p>
+        </div>
+        <div class="bg-gray-800 rounded px-2 py-2 flex items-center space-x-10 hover:bg-green-500 transition duration-300 ease-out mb-2" *ngFor="let answer of quiz.questions[currentQuestion].answers" (click)="marcarAnswer(answer.answerCorrect)">
+            <div class="w-8 h-8 bg-white rounded-full text-gray-800 flex justify-center items-center">
+                {{answer.answerItem}}
+            </div>
+            <div class="font-bold text-white">
+                {{answer.answerText}}
+            </div>
+        </div>
+        <div class="flex mt-4 sm:mt-2">
+            <p class="p-1 bg-gradient-to-r from-green-500 to-green-700 text-white rounded text-sm">Score: {{score}}/{{quiz.questions.length * 10}}</p>
+        </div>
+    </app-card>
+
+    <app-card *ngIf="results" class="w-[90%] sm:w-[40%]">
+        <div class="flex flex-col text-center mb-20">
+            <h2 class="text-gray-800 font-bold text-xl mb-2"><span class="text-green-500">{{username}},</span> Has finalizado nuestro Quiz.</h2>
+            <p class="font-semibold text-sm text-green-500">{{quiz.name}}</p>
+        </div>
+        <div class="flex flex-col items-center mb-16">
+            <h4 class="text-gray-800 font-bold text-xl mb-3">Puntuation: </h4>
+            <p class="px-6 py-2 rounded bg-gradient-to-r from-green-500 to-green-700 text-white text-sm">{{score}}/{{quiz.questions.length * 10}}</p>
+        </div>
+        <div class="flex justify-center space-x-6">
+            <button class="bg-green-500 text-white py-2 px-4 rounded" (click)="restartQuiz()">Restart Quiz</button>
+            <button class="bg-gray-800 text-white py-2 px-4 rounded" (click)="otherQuiz()">Other Quiz</button>
+        </div>
+    </app-card>
+</div>

@@ -1,0 +1,82 @@
+<div class="bg-gray-100 h-screen w-full flex justify-center items-center font-Unbounded">
+    <app-header></app-header>
+    <app-card class="w-[90%] sm:w-[40%]">
+        <div class="w-full h-[3px] bg-gray-300 mt-4 flex items-center justify-between">
+            <div class="flex justify-center items-center rounded-full text-sm p-1" [ngClass]="step1 ? 'w-10 h-10 bg-green-500 text-white' : 'bg-gray-300 text-gray-800 w-8 h-8'">
+                1
+            </div>
+            <div class="flex justify-center items-center rounded-full text-sm p-1" [ngClass]="step2 ? 'w-10 h-10 bg-green-500 text-white' : 'bg-gray-300 text-gray-800 w-8 h-8'">
+                2
+            </div>
+            <div class="flex justify-center items-center rounded-full text-sm p-1" [ngClass]="step3 ? 'w-10 h-10 bg-green-500 text-white' : 'bg-gray-300 text-gray-800 w-8 h-8'">
+                3
+            </div>
+            <div class="flex justify-center items-center rounded-full text-sm p-1" [ngClass]="step4 ? 'w-10 h-10 bg-green-500 text-white' : 'bg-gray-300 text-gray-800 w-8 h-8'">
+                4
+            </div>
+        </div>
+
+        <div *ngIf="step1" class="mt-14">
+            <h2 class="text-center text-gray-800 font-bold text-xl mb-10">Create Quiz</h2>
+            <form class="w-[90%] sm:w-[80%] mx-auto" (ngSubmit)="showStep2()">
+                <div class="flex flex-col mb-4">
+                    <label class="text-green-500 text-sm font-semibold mb-3">Name of Quiz*</label>
+                    <input [(ngModel)]="nameQuiz" [ngModelOptions]="{standalone: true}" type="text" placeholder="Name quiz." class="w-full rounded py-3 px-2 text-sm bg-gray-200 text-gray-400 outline-none">
+                    <p class="text-center text-sm mt-2 font-semibold text-red-500" *ngIf="alert != ''">{{alert}}</p>
+                </div>
+                <input type="submit" value="Add Questions" class="w-full py-3 rounded bg-gray-800 text-white font-semibold">
+            </form>
+        </div>
+
+        <div *ngIf="step2" class="mt-14">
+            <h2 class="text-center text-gray-800 font-bold text-xl mb-10">Create Question</h2>
+            <form class="w-[90%] sm:w-[80%] mx-auto" (ngSubmit)="showStep3()">
+                <div class="flex flex-col mb-4">
+                    <label class="text-green-500 text-sm font-semibold mb-3">Question*</label>
+                    <input [(ngModel)]="question" [ngModelOptions]="{standalone: true}" type="text" placeholder="Name quiz." class="w-full rounded py-3 px-2 text-sm bg-gray-200 text-gray-400 outline-none">
+                    <p class="text-center text-sm mt-2 font-semibold text-red-500" *ngIf="alert != ''">{{alert}}</p>
+                </div>
+                <input type="submit" value="Add Answers" class="w-full py-3 rounded bg-gray-800 text-white font-semibold">
+            </form>
+        </div>
+
+        <div *ngIf="step3" class="mt-8">
+            <h2 class="text-center text-gray-800 font-bold text-xl mb-6">Por favor ingresa las 4 respuestas.</h2>
+            <form class="mb-4" (ngSubmit)="createAnswer()">
+                <div class="flex flex-col w-full">
+                    <label class="text-green-500 text-sm font-semibold mb-2">Answer*</label>
+                    <input [(ngModel)]="answer" [ngModelOptions]="{standalone: true}" type="text" placeholder="Answer." class="py-3 px-2 w-full rounded bg-gray-200 text-gray-400 outline-none">
+                </div>
+            </form>
+            <div *ngFor="let answer of answers" class="flex space-x-10 items-center px-2 py-2 rounded bg-gray-300 text-gray-800 mb-2">
+                <div class="w-6 h-6 rounded-full flex items-center justify-center bg-white">
+                    {{answer.answerItem}}
+                </div>
+                <div class="font-bold">
+                    {{answer.answerText}}
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="step4" class="mt-8">
+            <h2 class="text-center text-gray-800 font-bold text-xl mb-2">Selecciona la respuesta correcta.</h2>
+            <p class="text-green-500 font-light text-center mb-3">Haz click sobre la respuesta que quieres elegir.</p>
+            <div *ngFor="let answer of answers; let i = index" class="flex space-x-10 items-center px-2 py-2 rounded mb-2" [ngClass]="answer.answerCorrect ? 'bg-green-500' : 'bg-gray-300 text-gray-800'" (click)="marcarCorrecta(i)">
+                <div class="w-6 h-6 rounded-full flex items-center justify-center bg-white">
+                    {{answer.answerItem}}
+                </div>
+                <div class="font-bold" [ngClass]="answer.answerCorrect ? 'text-white' : ''">
+                    {{answer.answerText}}
+                </div>
+            </div>
+            <div *ngIf="showButtons" class="flex justify-center space-x-6 mt-4">
+                <button class="px-4 py-2 bg-green-500 rounded text-white" (click)="otherQuestion()">Other Question</button>
+                <button class="px-4 py-2 bg-gray-800 rounded text-white" (click)="saveQuiz()">Save Quiz</button>
+            </div>
+        </div>
+    </app-card>
+</div>
+
+
+
+
