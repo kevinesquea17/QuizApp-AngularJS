@@ -21,7 +21,7 @@ export class HomePageAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.QuizService.getQuizes('http://localhost:3000/api/quiz').subscribe(res => {
+    this.QuizService.getQuizes('https://quizapp-api-nodejs-production.up.railway.app/api/quiz').subscribe(res => {
       this.listQuizes = res;
       console.log(res)
     })

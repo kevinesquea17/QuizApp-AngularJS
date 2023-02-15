@@ -39,7 +39,7 @@ export class DetailQuizComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUrl = this.router.url;
-    this.QuizService.getQuiz(`http://localhost:3000/api${this.currentUrl}`).subscribe(res => {
+    this.QuizService.getQuiz(`https://quizapp-api-nodejs-production.up.railway.app/api${this.currentUrl}`).subscribe(res => {
       this.quiz = res
       console.log(res)
     })

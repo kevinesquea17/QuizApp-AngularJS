@@ -36,7 +36,7 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    this.AdminService.login('http://localhost:3000/api/admin/login', {email: this.email, password: this.password}).subscribe(res => {
+    this.AdminService.login('https://quizapp-api-nodejs-production.up.railway.app/api/admin/login', {email: this.email, password: this.password}).subscribe(res => {
       this.admin = res;
       this.AdminService.cambiarUsuario(this.admin);
       localStorage.setItem('token', this.admin.token);

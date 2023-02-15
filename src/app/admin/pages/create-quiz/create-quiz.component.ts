@@ -119,7 +119,7 @@ export class CreateQuizComponent implements OnInit {
 
   saveQuiz(){
     const token: string = localStorage.getItem('token')!
-    this.QuizService.createQuiz('http://localhost:3000/api/quiz/create', this.quiz, token).subscribe(res => {
+    this.QuizService.createQuiz('https://quizapp-api-nodejs-production.up.railway.app/quiz/create', this.quiz, token).subscribe(res => {
       console.log(res);
       setTimeout(() => {
         this.router.navigate(['admin'])
